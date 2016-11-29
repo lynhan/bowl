@@ -52,3 +52,7 @@ pro
 - floating constant
 con
 - more mental effort to track flow of query string
+
+data flow
+browse needs info list of places or food 
+profile needs info and list

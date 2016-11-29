@@ -8,7 +8,6 @@ import { firebaseConfig } from '../../config'
 import Front from './Front'
 import Home from './Home'
 import Nav from './Nav'
-import Browse from './Browse'
 
 
 export default class App extends Component {
@@ -123,7 +122,8 @@ export default class App extends Component {
             return (
                 <div className="app">
                     <Nav />
-                    <Browse />
+                    {/* add this */}
+                    {this.props.children}
                 </div>
             )
         }

@@ -5,28 +5,33 @@ import { Router } from 'react-router';
 
 // my stuff
 import App from './components/App'
+import BrowseFood from './components/App/BrowseFood'
+import BrowsePlace from './components/App/BrowsePlace'
+import ProfileUser from './components/App/ProfileUser'
 
 const Routes = {
   path: '/',
-  component: App
-  // indexRoute: { component: Dashboard },
-  // childRoutes: [
-  //   { path: 'about', component: About },
-  //   {
-  //     path: 'inbox',
-  //     component: Inbox,
-  //     childRoutes: [{
-  //       path: 'messages/:id',
-  //       onEnter: ({ params }, replace) => replace(`/messages/${params.id}`)
-  //     }]
-  //   },
-  //   {
-  //     component: Inbox,
-  //     childRoutes: [{
-  //       path: 'messages/:id', component: Message
-  //     }]
-  //   }
-  // ]
+  component: App,
+  indexRoute: { component: BrowseFood },
+  childRoutes: [
+    { path: 'food', component: BrowseFood },
+    { path: 'place', component: BrowsePlace },
+    { path: 'me', component: ProfileUser },
+    // {
+    //   path: 'inbox',
+    //   component: Inbox,
+    //   childRoutes: [{
+    //     path: 'messages/:id',
+    //     onEnter: ({ params }, replace) => replace(`/messages/${params.id}`)
+    //   }]
+    // },
+    // {
+    //   component: Inbox,
+    //   childRoutes: [{
+    //     path: 'messages/:id', component: Message
+    //   }]
+    // }
+  ]
 }
 
 ReactDOM.render(

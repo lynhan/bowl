@@ -1,36 +1,46 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router'
 
 export default class Nav extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            query: ""
+            searchStr: ""
         }
-        this.setQuery = this.setQuery.bind(this)
+        this.setSearchStr = this.setSearchStr.bind(this)
     }
 
 
-    setQuery(event) {
-        this.setState({ query: event.target.value })
+    setSearchStr(event) {
+        this.setState({ searchStr: event.target.value })
     }
 
 
     render() {
         return (
             <div className="nav">
+
                 <span className="nav-home right">
-                    HOME
+                    <Link to="/food" activeClassName="active">FOOD</Link>
                 </span>
+
+                <span className="nav-home right">
+                    <Link to="/place" activeClassName="active">PLACE</Link>
+                </span>
+
                 <span className="nav-me right">
-                    ME
+                    <Link to="/me" activeClassName="active">ME</Link>
                 </span>
+
+                <span className="nav-search right">
                     <input type="text"
                         className="form-control small-right"
-                        id="query"
-                        value={this.state.query}
-                        onChange={this.setQuery} />
+                        id="searchStr"
+                        value={this.state.searchStr}
+                        onChange={this.setSearchStr} />
+                </span>
+
             </div>
         )
     }  // render

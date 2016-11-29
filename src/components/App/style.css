@@ -85,3 +85,7 @@
     cursor: pointer;
     color: lightgrey;
 }
+
+.active {
+  color: green;
+}
