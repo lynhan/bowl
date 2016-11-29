@@ -26,7 +26,7 @@ components
             FindBar
         Browse {places/, food/, add/}...props: findText
             List of places or foods
-            AddFood shows with empty findText
+            AddFood shows when query has 0 results
                 food name input
                 AddPlace
                 AddReview
@@ -44,3 +44,11 @@ components
         REUSABLE
             Info: name
             List: array of info components
+
+separate nav bar from rest of app
+pro
+- align with ui separation
+- decouple from rest of app
+- floating constant
+con
+- more mental effort to track flow of query string

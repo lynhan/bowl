@@ -55,9 +55,9 @@
 
 
 .form-control {
-    width: 50px !important;
+    width: 200px !important;
     text-align: right;
-    display: inline-block !important;
+    display: inline !important;
 }
 
 .header {

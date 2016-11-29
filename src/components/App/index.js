@@ -7,6 +7,8 @@ import * as firebase from 'firebase/firebase-browser'
 import { firebaseConfig } from '../../config'
 import Front from './Front'
 import Home from './Home'
+import Nav from './Nav'
+import Browse from './Browse'
 
 
 export default class App extends Component {
@@ -103,6 +105,7 @@ export default class App extends Component {
 
     render() {
         var user = firebase.auth().currentUser
+        let name = ""
         if (user) {
             // User is signed in.
             let name = this.state.user.name.split(" ")[0].toLowerCase()
@@ -119,7 +122,8 @@ export default class App extends Component {
             // No user is signed in.
             return (
                 <div className="app">
-                    <Front handleLogin={this.login} />
+                    <Nav />
+                    <Browse />
                 </div>
             )
         }
