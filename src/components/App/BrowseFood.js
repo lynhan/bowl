@@ -22,38 +22,40 @@ export default class BrowseFood extends Component {
 
 
     componentDidMount() {
+        console.log("listening")
         this.listenForData()
     }
 
 
     listenForData(uid) {
         let this_ = this
-        let placeRef = firebase
+        let foodRef = firebase
             .database()
-            .ref('place/')
+            .ref('food/')
 
-        placeRef.on('value', function(snapshot) {
+        foodRef.on('value', function(snapshot) {
             var data = snapshot.val()
-            console.log('place', data)
+            console.log('food', data)
             if (data != null) {
                 // add id as a field
                 var array = Object.keys(data)
                     .map(key => Object.assign({}, data[key], { 'id': key }))
                 // latest is first
                 array.reverse()
-                this_.setState({ placeList: array })
+                this_.setState({ list: array })
             } else {
-                this_.setState({ placeList: [] })
+                this_.setState({ list: [] })
             }
         })  // end observer
     }
 
 
     render() {
+        console.log("this.state.list", this.state.list)
         // 0 search results
         if (this.state.queryStr !== "" && this.state.list.length === 0) {
             return (
-                <div className="browse-place">
+                <div className="browse-food">
                     BROWSE FOOD::
                     <AddFood />
                 </div>
@@ -64,6 +66,7 @@ export default class BrowseFood extends Component {
         return (
             <div className="browse-food">
                 BROWSE FOOD::
+                <AddFood />
                 <InfoList list={this.state.list} />
             </div>
         )
