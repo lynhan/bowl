@@ -10,60 +10,57 @@ export default class AddFood extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: "",
+            foodNameStr: "",
             placeID: "",
             reviewID: "",
             file: '',
             imagePreviewUrl: '',
         }
-        this.setName = this.setName.bind(this)
         this.submit = this.submit.bind(this)
-        this.setName = this.setName.bind(this)
+        this.setFoodNameStr = this.setFoodNameStr.bind(this)
     }
 
 
-    setName(event) {
-        this.setState({ name: event.target.value })
+    setFoodNameStr(event) {
+        this.setState({ foodNameStr: event.target.value })
     }
 
-    // adds food key to place's food key array
-    // sets place id of food
-    push(foodName) {
-        var newPostKey = firebase
+
+    submit() {
+        // save picture
+        let storageRef = firebase.storage().ref();
+        let ref = storageRef.child('food/' + this.state.file.name)
+        ref.put(this.state.file).then(function (snapshot) {
+            console.log('Uploaded' + this.state.file.name)
+        })
+        
+        // save food entry
+        // foodNameStr and foodPictureRef
+        let newPostKey = firebase
             .database()
             .ref('food')
             .push()
             .key
-        var updates = {}
-        updates['/food/' + newPostKey] = foodName
+        let updates = {}
+        let foodObj = {
+            name: this.state.foodNameStr,
+            picture: 'food/' + this.state.file.name
+        }
+        updates['/food/' + newPostKey] = foodObj
         return firebase.database().ref().update(updates)  // can use in future
-    }
-
-
-    submit(e) {
-        e.preventDefault();
-        console.log('handle uploading-', this.state.file)
-        var storageRef = firebase.storage().ref();
-        var ref = storageRef.child(this.state.file.name);
-        ref.put(this.state.file).then(function (snapshot) {
-            console.log('Uploaded a blob or file!');
-        })
     }
 
 
     _handleImageChange(e) {
         e.preventDefault();
-
         let reader = new FileReader();
         let file = e.target.files[0];
-
         reader.onloadend = () => {
             this.setState({
                 file: file,
                 imagePreviewUrl: reader.result
             });
         }
-
         reader.readAsDataURL(file)
     }
 
@@ -77,22 +74,21 @@ export default class AddFood extends Component {
         }
         return (
             <div className="add-food">
-
-                <input
-                    className="form-control"
-                    placeholder="food name"
-                    type="text" />
-
-                <div className="">
-
+                <div className="add-food-name">
+                    <input type="text"
+                        className="form-control small-right"
+                        id="protein"
+                        value={this.state.foodNameStr}
+                        onChange={this.setFoodNameStr} />
+                    <label htmlFor="protein">food name</label>
+                </div>
+                <div className="add-food-image">
                     <span className="attachBtn mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
                         <i className="material-icons">attach_file</i>
                         <input type="file" id="uploadBtn"
                             onChange={(e) => this._handleImageChange(e)} />
                     </span>
-
                     <span> {status} </span>
-
                     <input
                         className="mdl-textfield__input upload"
                         placeholder="File"
@@ -100,12 +96,10 @@ export default class AddFood extends Component {
                         id="uploadFile"
                         readOnly />
                 </div>
-
                 <button
                     type="button"
                     className="mdl-button mdl-js-button mdl-button--raised"
                     onClick={this.submit}>add food</button>
-
                 <AddPlace />  {/* auto saves */}
             </div>
         )

@@ -37,6 +37,7 @@ export default class Nav extends Component {
                     <input type="text"
                         className="form-control small-right"
                         id="searchStr"
+                        placeholder="search"
                         value={this.state.searchStr}
                         onChange={this.setSearchStr} />
                 </span>

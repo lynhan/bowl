@@ -4,59 +4,47 @@ import AddFood from './AddFood'
 import InfoList from './InfoList'
 
 export default class BrowseFood extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
-            queryStr: "",
-            list: []
+            data: []
         }
-        this.setQuery = this.setQuery.bind(this)
-        this.listenForData = this.listenForData.bind(this)
-    }
-
-
-    setQuery(event) {
-        this.setState({ query: event.target.value })
+        this.observeFood = this.observeFood.bind(this)
     }
 
 
     componentDidMount() {
-        console.log("listening")
-        this.listenForData()
+        this.observeFood()
     }
 
 
-    listenForData(uid) {
+    observeFood() {
         let this_ = this
-        let foodRef = firebase
+        let ref = firebase
             .database()
             .ref('food/')
-
-        foodRef.on('value', function(snapshot) {
+        ref.on('value', function (snapshot) {
             var data = snapshot.val()
-            console.log('food', data)
             if (data != null) {
-                // add id as a field
                 var array = Object.keys(data)
                     .map(key => Object.assign({}, data[key], { 'id': key }))
-                // latest is first
                 array.reverse()
-                this_.setState({ list: array })
+                console.log('BrowseFood data', array)
+                this_.setState({ data: array })
             } else {
-                this_.setState({ list: [] })
+                this_.setState({ data: [] })
             }
-        })  // end observer
+        })
     }
 
 
     render() {
-        console.log("this.state.list", this.state.list)
         // 0 search results
-        if (this.state.queryStr !== "" && this.state.list.length === 0) {
+        if (this.state.queryStr !== ""
+            && this.state.list
+            && this.state.list.length === 0) {
             return (
                 <div className="browse-food">
-                    BROWSE FOOD::
                     <AddFood />
                 </div>
             )
@@ -65,9 +53,8 @@ export default class BrowseFood extends Component {
         // show a list!
         return (
             <div className="browse-food">
-                BROWSE FOOD::
                 <AddFood />
-                <InfoList list={this.state.list} />
+                <InfoList data={this.state.data} />
             </div>
         )
     }  // render

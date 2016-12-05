@@ -5,8 +5,6 @@ import './style.css'
 
 import * as firebase from 'firebase/firebase-browser'
 import { firebaseConfig } from '../../config'
-import Front from './Front'
-import Home from './Home'
 import Nav from './Nav'
 
 
@@ -16,17 +14,24 @@ export default class App extends Component {
         super(props)
         firebase.initializeApp(firebaseConfig)
         this.state = {
+            searchStr: "",
             data: [],
             user: {}
         }
-        this.listenForData = this.listenForData.bind(this)
+        this.observeAuth = this.observeAuth.bind(this)
     }
 
 
     componentDidMount() {
+        this.observeAuth()
+    }
+
+
+    observeAuth() {
         let this_ = this
+        // update user state on auth change
         firebase.auth().onAuthStateChanged(function (user) {
-            console.log("user is now:", user)
+            console.log("User:", user)
             if (user != null) {
                 this_.setState({
                     user: {
@@ -35,7 +40,6 @@ export default class App extends Component {
                         id: user.uid
                     }
                 })
-                this_.listenForData(user.uid)
             } else {
                 this_.setState({
                     data: [],
@@ -43,26 +47,6 @@ export default class App extends Component {
                 })
             }
         });
-    }
-
-
-    listenForData(uid) {
-        let this_ = this
-        let dataRef = firebase
-            .database()
-            .ref('users/' + uid + "/post/")
-        dataRef.on('value', function (snapshot) {
-            var data = snapshot.val()
-            console.log('data', data)
-            if (data != null) {
-                var array = Object.keys(data)
-                    .map(key => Object.assign({}, data[key], { 'id': key }))
-                array.reverse()
-                this_.setState({ data: array })
-            } else {
-                this_.setState({ data: [] })
-            }
-        })
     }
 
 
@@ -104,28 +88,11 @@ export default class App extends Component {
 
     render() {
         var user = firebase.auth().currentUser
-        let name = ""
-        if (user) {
-            // User is signed in.
-            let name = this.state.user.name.split(" ")[0].toLowerCase()
-            return (
-                <div className="app">
-                    <Home
-                        name={name}
-                        user={this.state.user}
-                        data={this.state.data}
-                        handleLogout={this.logout} />
-                </div>
-            )
-        } else {
-            // No user is signed in.
-            return (
-                <div className="app">
-                    <Nav />
-                    {/* add this */}
-                    {this.props.children}
-                </div>
-            )
-        }
+        return (
+            <div className="app">
+                <Nav />
+                {this.props.children}
+            </div>
+        )
     } // end render
 }
