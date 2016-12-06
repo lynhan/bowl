@@ -7,6 +7,7 @@ import { Router } from 'react-router';
 import App from './components/App'
 import BrowseFood from './components/App/BrowseFood'
 import BrowsePlace from './components/App/BrowsePlace'
+import AddFood from './components/App/AddFood'
 import ProfileUser from './components/App/ProfileUser'
 
 const Routes = {
@@ -16,6 +17,7 @@ const Routes = {
   childRoutes: [
     { path: 'food', component: BrowseFood },
     { path: 'place', component: BrowsePlace },
+    { path: 'submit', component: AddFood },
     { path: 'me', component: ProfileUser },
     // {
     //   path: 'inbox',

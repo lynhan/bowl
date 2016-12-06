@@ -20,19 +20,18 @@ export default class Nav extends Component {
     render() {
         return (
             <div className="nav">
-
                 <span className="nav-home right">
                     <Link to="/food" activeClassName="active">FOOD</Link>
                 </span>
-
                 <span className="nav-home right">
                     <Link to="/place" activeClassName="active">PLACE</Link>
                 </span>
-
+                <span className="nav-home right">
+                    <Link to="/submit" activeClassName="active">SUBMIT</Link>
+                </span>
                 <span className="nav-me right">
                     <Link to="/me" activeClassName="active">ME</Link>
                 </span>
-
                 <span className="nav-search right">
                     <input type="text"
                         className="form-control small-right"
@@ -41,7 +40,6 @@ export default class Nav extends Component {
                         value={this.state.searchStr}
                         onChange={this.setSearchStr} />
                 </span>
-
             </div>
         )
     }  // render

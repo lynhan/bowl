@@ -87,7 +87,7 @@ export default class App extends Component {
 
 
     render() {
-        var user = firebase.auth().currentUser
+        // var user = firebase.auth().currentUser
         return (
             <div className="app">
                 <Nav />

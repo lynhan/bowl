@@ -10,6 +10,13 @@ export default class InfoList extends Component {
                 </div>
             )
         }
+        if (!this.props.data) {
+            return (
+                <div className="info-list">
+                Nothing to show!
+                </div>
+            )  // end return
+        }
         let infoList = this.props.data.map(function (item, index) {
             return (
                 <div key={index}>

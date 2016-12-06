@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase/firebase-browser'
-import AddFood from './AddFood'
 import InfoList from './InfoList'
 
 export default class BrowseFood extends Component {
@@ -39,21 +38,8 @@ export default class BrowseFood extends Component {
 
 
     render() {
-        // 0 search results
-        if (this.state.queryStr !== ""
-            && this.state.list
-            && this.state.list.length === 0) {
-            return (
-                <div className="browse-food">
-                    <AddFood />
-                </div>
-            )
-        }
-
-        // show a list!
         return (
             <div className="browse-food">
-                <AddFood />
                 <InfoList data={this.state.data} />
             </div>
         )
