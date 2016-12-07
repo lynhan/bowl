@@ -3,7 +3,7 @@ import { mapApiKey } from '../../../config'
 import * as firebase from 'firebase/firebase-browser'
 
 // my stuff
-// import AddPlace from './AddPlace'
+import AddPlace from './AddPlace'
 // import AddFood from './AddFood'
 // import AddReview from './AddReview'
 
@@ -72,13 +72,13 @@ class Submit extends Component {
     //         .then(function () {
     //             console.log("added review")
     //         })
-    // }  <AddPlace setPlace={this.setPlace} />
+    // }  
 
 
     render() {
         return (
             <div className="add">
-                SUBMIT
+                <AddPlace setPlace={this.setPlace} />
                 <button onClick={this.submit}> submit </button>
             </div>
         )

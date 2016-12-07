@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { mapApiKey } from '../../config'
+import { mapApiKey } from '../../../config'
 
 export default class AddPlace extends Component {
     componentDidMount() {

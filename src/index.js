@@ -12,6 +12,7 @@ const Routes = {
         require('./routes/BrowsePlace'),
         require('./routes/Submit'),
         require('./routes/ProfileUser'),
+        require('./routes/Oop'),
     ]
 }
 

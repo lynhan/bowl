@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-class ProfilePlace extends Component {
+class BrowsePlace extends Component {
     render() {
         return (
             <div className="profile-place">
-                PROFILE PLACE
+                BROWSE PLACE
             </div>
         )
     }
 }
 
-module.exports = ProfilePlace
+module.exports = BrowsePlace
