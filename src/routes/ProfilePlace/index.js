@@ -1,8 +1,8 @@
 module.exports = {
-    path: '/:id',
+    path: 'place/:id',
     getComponent(nextState, cb) {
         require.ensure([], (require) => {
-            cb(null, require('./components/BrowsePlace'))
+            cb(null, require('./components/ProfilePlace'))
         })
     },
 }

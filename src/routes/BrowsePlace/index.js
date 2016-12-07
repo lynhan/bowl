@@ -1,5 +1,5 @@
 module.exports = {
-    path: '/place',
+    path: '/browseplaces',
     getComponent(nextState, cb) {
         require.ensure([], (require) => {
             cb(null, require('./components/BrowsePlace'))
