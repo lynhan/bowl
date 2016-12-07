@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class ProfileFood extends Component {
+class ProfileFood extends Component {
     render() {
         return (
             <div className="profile-food">
@@ -12,3 +12,5 @@ export default class ProfileFood extends Component {
         )
     }
 }
+
+module.exports = ProfileFood

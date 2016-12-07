@@ -1,21 +1,18 @@
 database models
+    place
+        name
 
     food
-        place id
-        review ids
         name
-
-    place
-        food ids
-        name
+        place id KEY
 
     review
-        user id
-        food id
+        user id KEY
+        food id KEY
+        pic url => 'pic/' + GOOGLE_PLACE_ID + '/' + FOOD_ID
         bool
 
     user
-        reviews
         name
 
 components

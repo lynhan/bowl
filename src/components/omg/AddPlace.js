@@ -9,9 +9,16 @@ export default class AddPlace extends Component {
         document.body.appendChild(script)
     }
 
+
+    setPlace(placeName) {
+        this.setState({ placeName: placeName })
+    }
+
+    
     render() {
         return (
             <div className="add-place">
+            WHOA SET PLACE
                 <input id="pac-input" className="controls" type="text" placeholder="Search Box" />
                 <div id="map"></div>
             </div>

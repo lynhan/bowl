@@ -20,9 +20,8 @@
 * element that contains the map. */
     
     #map {
-        height: 600px;
+        height: 300px;
     }
-    
     .controls {
         margin-top: 10px;
         border: 1px solid transparent;
@@ -120,7 +119,7 @@
                 console.log("Returned place contains no geometry");
                 return;
             }
-            var url = "/p/"+place.id+"/"+encodeURIComponent(place.name);
+            var url = "/place/"+place.id;
             var infowindow = new google.maps.InfoWindow({
                 content: '<a href='+url+'>'+place.name+'</a>',
             });
@@ -143,5 +142,4 @@
 }
 </script>
 </body>
-
 </html>
