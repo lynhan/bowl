@@ -9,6 +9,7 @@ class BrowseFood extends Component {
             data: []
         }
         this.observeFood = this.observeFood.bind(this)
+        this.setSearchStr = this.setSearchStr.bind(this)
     }
 
 
@@ -37,9 +38,20 @@ class BrowseFood extends Component {
     }
 
 
+    setSearchStr(event) {
+        this.setState({ searchStr: event.target.value })
+    }
+
+
     render() {
         return (
             <div className="browse-food">
+                <input type="text"
+                    className="browse-food-search form-control"
+                    id="searchStr"
+                    placeholder="search food"
+                    value={this.state.searchStr}
+                    onChange={this.setSearchStr} />
                 <InfoList data={this.state.data} />
             </div>
         )

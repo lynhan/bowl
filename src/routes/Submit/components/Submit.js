@@ -2,11 +2,6 @@ import React, { Component } from 'react'
 import { mapApiKey } from '../../../config'
 import * as firebase from 'firebase/firebase-browser'
 
-// my stuff
-import AddPlace from './AddPlace'
-// import AddFood from './AddFood'
-// import AddReview from './AddReview'
-
 class Submit extends Component {
     constructor(props) {
         super(props)
@@ -18,7 +13,6 @@ class Submit extends Component {
         this.setFood = this.setFood.bind(this)
         this.setPlace = this.setPlace.bind(this)
         this.setReview = this.setReview.bind(this)
-        this.submit = this.submit.bind(this)
     }
 
 
@@ -50,16 +44,6 @@ class Submit extends Component {
         })
     }
 
-
-    submit() {
-        var user = firebase.auth().currentUser;
-        if (!user) {
-            alert('please sign in first :)')
-            return
-        }
-        // TODO validation
-    }
-
     // addPlace() {
     //     let place = {
     //         name: PLACE_NAME,
@@ -74,12 +58,11 @@ class Submit extends Component {
     //         })
     // }  
 
-
     render() {
         return (
             <div className="add">
-                <AddPlace setPlace={this.setPlace} />
-                <button onClick={this.submit}> submit </button>
+                <input id="pac-input" className="controls" type="text" placeholder="Search Box" />
+                <div id="map"></div>
             </div>
         )
     }

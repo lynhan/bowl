@@ -8,37 +8,23 @@ export default class Nav extends Component {
         this.state = {
             searchStr: ""
         }
-        this.setSearchStr = this.setSearchStr.bind(this)
-    }
-
-
-    setSearchStr(event) {
-        this.setState({ searchStr: event.target.value })
     }
 
 
     render() {
         return (
             <div className="nav">
-                <span className="nav-home right">
-                    <Link to="/browsefood" activeClassName="active">FOOD</Link>
+                <span>
+                    <Link to="/browsefood" className="nav-link">FOOD</Link>
                 </span>
-                <span className="nav-home right">
-                    <Link to="/browseplaces" activeClassName="active">PLACE</Link>
+                <span>
+                    <Link to="/browseplaces" className="nav-link">PLACE</Link>
                 </span>
-                <span className="nav-home right">
-                    <Link to="/submit" activeClassName="active">SUBMIT</Link>
+                <span>
+                    <Link to="/submit" className="nav-link">SUBMIT</Link>
                 </span>
-                <span className="nav-me right">
-                    <Link to="/me" activeClassName="active">ME</Link>
-                </span>
-                <span className="nav-search right">
-                    <input type="text"
-                        className="form-control small-right"
-                        id="searchStr"
-                        placeholder="search"
-                        value={this.state.searchStr}
-                        onChange={this.setSearchStr} />
+                <span>
+                    <Link to="/me" className="nav-link">ME</Link>
                 </span>
             </div>
         )

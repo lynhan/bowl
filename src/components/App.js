@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap-theme.css'
 import * as firebase from 'firebase/firebase-browser'
 import { firebaseConfig } from '../config'
 import Nav from './Nav'
+import './style.css'
 
 class App extends Component {
 
