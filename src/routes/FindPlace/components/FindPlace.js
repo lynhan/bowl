@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { mapApiKey } from '../../../config'
 import * as firebase from 'firebase/firebase-browser'
 
-class Submit extends Component {
+class FindPlace extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -68,4 +68,4 @@ class Submit extends Component {
     }
 }
 
-module.exports = Submit
+module.exports = FindPlace

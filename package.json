@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.15.3",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "firebase": "^3.5.2",
+    "google-maps": "^3.2.1",
     "react": "^15.3.2",
+    "react-ajax": "^0.1.1",
     "react-bootstrap": "^0.30.6",
     "react-dom": "^15.3.2",
     "react-essence": "^1.0.10",

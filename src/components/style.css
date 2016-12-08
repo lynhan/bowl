@@ -13,12 +13,13 @@ body {
     margin-right: 15px;
 }
 .nav > span > .nav-link {
-    color: black;
+    color: lightseagreen;
     text-decoration: none;
 }
-.nav > span > .nav-link:active {
-    color: mediumspringgreen;
-}
 .nav > span > .nav-link:hover {
-    color: lightseagreen;
+    color: cadetblue;
+}
+/*nav-link active class name*/
+.active {
+    color: mediumspringgreen;
 }

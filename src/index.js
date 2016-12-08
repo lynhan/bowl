@@ -9,10 +9,10 @@ const Routes = {
     indexRoute: { onEnter: (nextState, replace) => replace('/food') },
     childRoutes: [
         require('./routes/BrowseFood'),
-        require('./routes/BrowsePlace'),
-        require('./routes/Submit'),
-        require('./routes/ProfileUser'),
+        require('./routes/FindPlace'),
+        require('./routes/ProfileFood'),
         require('./routes/ProfilePlace'),
+        require('./routes/ProfileUser'),
         require('./routes/Oop'),
     ]
 }

@@ -15,16 +15,19 @@ export default class Nav extends Component {
         return (
             <div className="nav">
                 <span>
-                    <Link to="/browsefood" className="nav-link">FOOD</Link>
+                    <Link to="/browsefood"
+                    className="nav-link"
+                    activeClassName="active">food</Link>
                 </span>
                 <span>
-                    <Link to="/browseplaces" className="nav-link">PLACE</Link>
+                    <Link to="/findplace"
+                    className="nav-link"
+                    activeClassName="active">place</Link>
                 </span>
                 <span>
-                    <Link to="/submit" className="nav-link">SUBMIT</Link>
-                </span>
-                <span>
-                    <Link to="/me" className="nav-link">ME</Link>
+                    <Link to="/me"
+                    className="nav-link"
+                    activeClassName="active">me</Link>
                 </span>
             </div>
         )

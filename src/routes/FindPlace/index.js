@@ -1,8 +1,8 @@
 module.exports = {
-    path: '/submit',
+    path: '/findplace',
     getComponent(nextState, cb) {
         require.ensure([], (require) => {
-            cb(null, require('./components/Submit'))
+            cb(null, require('./components/FindPlace'))
         })
     },
 }
