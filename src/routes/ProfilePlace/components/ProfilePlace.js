@@ -30,7 +30,7 @@ class ProfilePlace extends Component {
 
         firebase
         .database()
-        .ref('/place/' + this_.props.params.id)
+        .ref('/place/' + place_id)
         .once('value').then(function(snapshot) {
             let data = snapshot.val()
             if (data === null) {
@@ -41,16 +41,25 @@ class ProfilePlace extends Component {
                 axios
                 .get(url)
                 .then(function (response) {
+                    console.log('place info fetch success')
                     let place = response.data.result
+                    let newPlace = {
+                        name: place.name,
+                        summary: place.vicinity
+                    }
                     this_.setState({
-                        place: {
-                            name: place.name,
-                            summary: place.vicinity
-                        }
+                        place: newPlace
                     })
-                })
-                .catch(function (error) {
-                    console.log("place info fetch error", error);
+                    firebase
+                        .database()
+                        .ref('place/' + place_id)
+                        .set(newPlace)
+                        .then(function() {
+                            console.log("added place")
+                        })
+                        .catch(function() {
+                            console.log("add place err :(")
+                        })
                 })
             } else {
                 let ref = firebase
@@ -58,11 +67,12 @@ class ProfilePlace extends Component {
                     .ref('food/')
                 ref.on('value', function (snapshot) {
                     var data = snapshot.val()
-                    if (data != null) {
+                    if (data !== null) {
                         var array = Object.keys(data)
                             .map(key => Object.assign({}, data[key], { 'id': key }))
-                        array.filter(function(item) {
-                            return item.place_id == place_id
+                        console.log("prev food", array)
+                        array = array.filter(function(item) {
+                            return item.place_id === place_id
                         })
                         array.reverse()
                         this_.setState({

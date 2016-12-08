@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { mapApiKey } from '../../../config'
-import * as firebase from 'firebase/firebase-browser'
 
 class FindPlace extends Component {
     constructor(props) {
