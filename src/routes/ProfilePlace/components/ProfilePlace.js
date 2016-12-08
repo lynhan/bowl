@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase/firebase-browser'
-import Info from '../../../container/Info'
-// import InfoList from '../../../container/InfoList'
 import { mapApiKey } from '../../../config'
 var axios = require('axios')
+
+import Info from '../../../container/Info'
+import InfoList from '../../../container/InfoList'
+import AddFood from './AddFood'
 
 
 class ProfilePlace extends Component {
@@ -51,7 +53,25 @@ class ProfilePlace extends Component {
                     console.log("place info fetch error", error);
                 })
             } else {
-                
+                let ref = firebase
+                    .database()
+                    .ref('food/')
+                ref.on('value', function (snapshot) {
+                    var data = snapshot.val()
+                    if (data != null) {
+                        var array = Object.keys(data)
+                            .map(key => Object.assign({}, data[key], { 'id': key }))
+                        array.filter(function(item) {
+                            return item.place_id == place_id
+                        })
+                        array.reverse()
+                        this_.setState({
+                            food: array
+                        })
+                    } else {
+                        this_.setState({ food: [] })
+                    }
+                })
             }
         });
     }
@@ -60,9 +80,10 @@ class ProfilePlace extends Component {
     render() {
         return (
             <div className="profile-place">
-               { /* data expects name, summary, picture /> */}
-               <Info data={this.state.place} />
-               { /* <Infolist data={this.state.food} /> */}
+                { /* data expects name, summary, picture /> */}
+                <AddFood place_id={this.props.params.id} />
+                <Info data={this.state.place} />
+                <InfoList data={this.state.food} />
             </div>
         )
     }

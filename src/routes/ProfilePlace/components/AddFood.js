@@ -1,32 +1,40 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase/firebase-browser'
 
-export default class AddFood extends Component {
+class AddFood extends Component {
     constructor(props) {
         super(props)
         this.state = {
             foodName: "",
         }
+        this.submit = this.submit.bind(this)
+        this.setFoodName = this.setFoodName.bind(this)
     }
 
 
-    setFood(event) {
-        this.props.setFood(event.target.value)
+    setFoodName(event) {
+        this.setState({ foodName: event.target.value })
     }
 
-    // addFood() {
-    //     let food = {
-    //         name: PLACE_NAME,
-    //         place_id: GOOGLE_PLACE_ID
-    //     }
-    //     firebase
-    //         .database()
-    //         .ref('food' + GOOGLE_PLACE_ID)
-    //         .set(food)
-    //         .then(function() {
-    //             console.log("added food")
-    //         })
-    // }
+
+    submit() {
+        // TODO validation
+        let food = {
+            name: this.state.foodName,
+            place_id: this.props.place_id
+        }
+        firebase
+            .database()
+            .ref('food/')
+            .push()
+            .set(food)
+            .then(function() {
+                console.log("added food")
+            })
+            .catch(function() {
+                console.log("add food err :(")
+            })
+    }
 
 
     render() {
@@ -36,11 +44,13 @@ export default class AddFood extends Component {
                     <input type="text"
                         className=""
                         id="foodName"
-                        value={this.state.foodName}
-                        onChange={this.setFood} />
+                        onChange={this.setFoodName} />
                     <label htmlFor="foodName">food name</label>
                 </div>
+                <button onClick={this.submit}> submit </button>
             </div>
         )  // end return
     } // end render
 }
+
+module.exports = AddFood

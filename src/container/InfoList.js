@@ -6,14 +6,14 @@ export default class InfoList extends Component {
         if (this.props.data && this.props.data.length === 0) {
             return (
                 <div className="info-list">
-                    NOTHING TO SHOW
+                    Nothing so far :D
                 </div>
             )
         }
         if (!this.props.data) {
             return (
                 <div className="info-list">
-                Nothing to show!
+                    Nothing so far :D
                 </div>
             )  // end return
         }
