@@ -30,7 +30,10 @@ class BrowseFood extends Component {
                     .map(key => Object.assign({}, data[key], { 'id': key }))
                 array.reverse()
                 console.log('BrowseFood data', array)
-                this_.setState({ data: array })
+                this_.setState({
+                    data: array,
+                    filtered: array
+                })
             } else {
                 this_.setState({ data: [] })
             }
@@ -39,7 +42,12 @@ class BrowseFood extends Component {
 
 
     setSearchStr(event) {
-        this.setState({ searchStr: event.target.value })
+        let str = event.target.value
+        this.setState({
+            filtered: this.state.data.filter(function(item) {
+                return item.name.includes(str)
+            })
+        })
     }
 
 
@@ -50,9 +58,8 @@ class BrowseFood extends Component {
                     className="browse-food-search form-control"
                     id="searchStr"
                     placeholder="search food"
-                    value={this.state.searchStr}
                     onChange={this.setSearchStr} />
-                <InfoList data={this.state.data} />
+                <InfoList data={this.state.filtered} />
             </div>
         )
     }  // render

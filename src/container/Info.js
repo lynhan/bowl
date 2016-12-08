@@ -48,8 +48,6 @@ export default class Info extends Component {
 
 
     render() {
-        console.log('INFO ', this.props.data)
-
         let picture 
         if (this.state.pictureUrlStr) {
             picture = (
@@ -78,6 +76,7 @@ export default class Info extends Component {
                 </div>
             )
         }
+
         return (
             <div className="info">
                 {picture}

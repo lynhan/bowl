@@ -32,8 +32,10 @@ class ProfilePlace extends Component {
         .once('value').then(function(snapshot) {
             let data = snapshot.val()
             if (data === null) {
-                let url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + place_id + "&key=" + mapApiKey
-                
+                let url = (
+                    "https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
+                    + place_id + "&key=" + mapApiKey
+                )
                 axios
                 .get(url)
                 .then(function (response) {
@@ -49,7 +51,7 @@ class ProfilePlace extends Component {
                     console.log("place info fetch error", error);
                 })
             } else {
-
+                
             }
         });
     }
