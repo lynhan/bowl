@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase/firebase-browser'
+import { Link } from 'react-router'
 
 export default class Info extends Component {
     constructor(props) {
@@ -49,21 +50,24 @@ export default class Info extends Component {
 
     render() {
         let picture 
-        if (this.state.pictureUrlStr) {
-            picture = (
-                <div className="info-picture">
-                    <img src={this.state.pictureUrlStr}
-                    alt="loading pic..."
-                    width="200px"/>
-                </div>
-            )
-        }
+        // if (this.state.pictureUrlStr) {
+        //     picture = (
+        //         <div className="info-picture">
+        //             <img src={this.state.pictureUrlStr}
+        //             alt="loading pic..."
+        //             className="image"/>
+        //         </div>
+        //     )
+        // }
 
         let name
         if (this.props.data.name) {
+            let url = "food/" + this.props.data.id
             name = (
                 <div className="info-name">
-                    {this.props.data.name}
+                   <Link to={url}
+                    className="nav-link"
+                    activeClassName="active">{this.props.data.name}</Link>
                 </div>
             )
         }

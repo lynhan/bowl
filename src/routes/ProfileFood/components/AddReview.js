@@ -3,25 +3,25 @@ import React, { Component } from 'react'
 export default class AddReview extends Component {
 
 
-    setImage(e) {
-        e.preventDefault();
-        let reader = new FileReader();
-        let file = e.target.files[0];
-        reader.onloadend = () => {
-            this.setState({
-                file: file,
-                imagePreviewUrl: reader.result
-            });
-        }
-        reader.readAsDataURL(file)
-    }
+    // setImage(e) {
+    //     e.preventDefault();
+    //     let reader = new FileReader();
+    //     let file = e.target.files[0];
+    //     reader.onloadend = () => {
+    //         this.setState({
+    //             file: file,
+    //             imagePreviewUrl: reader.result
+    //         });
+    //     }
+    //     reader.readAsDataURL(file)
+    // }
 
-    setReview(picFile, bool) {
-        this.setState({
-            picFile: picFile,
-            bool: bool
-        })
-    }
+    // setReview(picFile, bool) {
+    //     this.setState({
+    //         picFile: picFile,
+    //         bool: bool
+    //     })
+    // }
 
 
     // addReview() {
@@ -53,30 +53,33 @@ export default class AddReview extends Component {
 
 
     render() {
-        let status
-        if (this.state.file) {
-            status = (<span> {this.state.file.name} </span>)
-        } else {
-            status = (<span> pick a picture! </span>)
-        }
         return (
-            <div className="add-review">
-                <div className="add-review-image">
-                    <span className="attachBtn mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
-                        <i className="material-icons">attach_file</i>
-                        <input type="file" id="uploadBtn"
-                            onChange={(e) => this.setImage(e)} />
-                    </span>
-                    <span> {status} </span>
-                    {/* this is hidden :D */}
-                    <input
-                        className="mdl-textfield__input upload"
-                        placeholder="File"
-                        type="text"
-                        id="uploadFile"
-                        readOnly />
-                </div>
-            </div>
+            <div>Add review here </div>
         )
+        // let status
+        // if (this.state.file) {
+        //     status = (<span> {this.state.file.name} </span>)
+        // } else {
+        //     status = (<span> pick a picture! </span>)
+        // }
+        // return (
+        //     <div className="add-review">
+        //         <div className="add-review-image">
+        //             <span className="attachBtn mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
+        //                 <i className="material-icons">attach_file</i>
+        //                 <input type="file" id="uploadBtn"
+        //                     onChange={(e) => this.setImage(e)} />
+        //             </span>
+        //             <span> {status} </span>
+        //             {/* this is hidden :D */}
+        //             <input
+        //                 className="mdl-textfield__input upload"
+        //                 placeholder="File"
+        //                 type="text"
+        //                 id="uploadFile"
+        //                 readOnly />
+        //         </div>
+        //     </div>
+        // )
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Info from './Info'
+import FoodListItem from './FoodListItem'
 
 export default class InfoList extends Component {
     render() {
@@ -15,18 +15,19 @@ export default class InfoList extends Component {
                 <div className="info-list">
                     Nothing so far :D
                 </div>
-            )  // end return
+            )
         }
-        let infoList = this.props.data.map(function (item, index) {
+        // render items
+        let list = this.props.data.map(function (item, index) {
             return (
                 <div key={index}>
-                    <Info data={item} />
+                    <FoodListItem data={item} />
                 </div>
             )
         })
         return (
             <div className="info-list">
-                {infoList}
+                {list}
             </div>
         )  // end return
     }  // end render

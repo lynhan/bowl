@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase/firebase-browser'
-import InfoList from '../../../container/InfoList'
+import FoodList from '../../../container/FoodList'
 
 class BrowseFood extends Component {
     constructor(props) {
@@ -59,7 +59,7 @@ class BrowseFood extends Component {
                     id="searchStr"
                     placeholder="search food"
                     onChange={this.setSearchStr} />
-                <InfoList data={this.state.filtered} />
+                <FoodList data={this.state.filtered} />
             </div>
         )
     }  // render
