@@ -42,6 +42,8 @@ components
             Info: name
             List: array of info components
 
+
+
 separate nav bar from rest of app
 pro
 - align with ui separation
