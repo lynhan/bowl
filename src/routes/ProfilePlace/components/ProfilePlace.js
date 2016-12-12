@@ -3,10 +3,12 @@ import * as firebase from 'firebase/firebase-browser'
 import { mapApiKey } from '../../../config'
 var axios = require('axios')
 
-import FoodList from '../../../container/FoodList'
+import FoodList from './FoodList'
 import AddFood from './AddFood'
 
-
+/*
+props: id (google place id)
+*/
 class ProfilePlace extends Component {
     constructor(props) {
         super(props)
@@ -27,10 +29,10 @@ class ProfilePlace extends Component {
 
     askGoogleAndSavePlace() {
         let this_ = this
-        let place_id = this.props.params.id
+        let placeId = this.props.params.id
         let url = (
             "https://maps.googleapis.com/maps/api/place/details/json?placeid=" 
-            + place_id + "&key=" + mapApiKey
+            + placeId + "&key=" + mapApiKey
         )
         axios
         .get(url)
@@ -46,7 +48,7 @@ class ProfilePlace extends Component {
             })
             firebase
                 .database()
-                .ref('place/' + place_id)
+                .ref('place/' + placeId)
                 .set(newPlace)
                 .then(function() {
                     console.log("added place")
@@ -60,7 +62,7 @@ class ProfilePlace extends Component {
 
     fetchFood(data) {
         let this_ = this
-        let place_id = this.props.params.id
+        let placeId = this.props.params.id
         
         let newPlace = {
             name: data.name,
@@ -74,36 +76,36 @@ class ProfilePlace extends Component {
             .ref('food/')
         ref.on('value', function (snapshot) {
             var data = snapshot.val()
-            if (data !== null) {
+            if (data === null) {
+                this_.setState({ food: [] })
+            } else {
                 var array = Object.keys(data)
                     .map(key => Object.assign({}, data[key], { 'id': key }))
-                console.log("prev food", array)
                 array = array.filter(function(item) {
-                    return item.place_id === place_id
+                    return item.placeId === placeId
                 })
                 array.reverse()
                 this_.setState({
                     food: array
                 })
-            } else {
-                this_.setState({ food: [] })
-            }
-        })
+            } // end else
+        })  // end value observer
     }
 
 
     observePlace() {
-        let place_id = this.props.params.id
+        let this_ = this
+        let placeId = this.props.params.id
 
         firebase
         .database()
-        .ref('/place/' + place_id)
+        .ref('/place/' + placeId)
         .once('value').then(function(snapshot) {
             let data = snapshot.val()
             if (data === null) {
-                this.askGoogleAndSavePlace()
+                this_.askGoogleAndSavePlace()
             } else {
-                this.fetchFood(data)
+                this_.fetchFood(data)
             }
         });
     }
@@ -112,17 +114,19 @@ class ProfilePlace extends Component {
     render() {
         return (
             <div className="profile-place">
-                
+
                 { /* about place /> */}
                 <div className="profile-place-name">
-                    {this.state.place.name}
+                    PLACE NAME: {this.state.place.name}
                 </div>
                 <div className="profile-place-name">
-                    {this.state.place.summary}
+                    LOCATION: {this.state.place.summary}
                 </div>          
 
                 { /* data expects name, summary, picture /> */}
-                <AddFood place_id={this.props.params.id} />
+                <AddFood
+                placeId={this.props.params.id}
+                placeName={this.state.place.name} />
 
                 <FoodList data={this.state.food} />
             </div>

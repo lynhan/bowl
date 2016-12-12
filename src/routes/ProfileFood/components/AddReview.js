@@ -7,8 +7,9 @@ export default class AddReview extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            file: {}, 
+            file: {},
             picPreviewUrl: "",
+            bool: false,
         }
         this.setImage = this.setImage.bind(this)
         this.setBool = this.setBool.bind(this)
@@ -17,7 +18,7 @@ export default class AddReview extends Component {
 
 
     setBool(e) {
-        debugger
+        this.setState({ bool: e.target.checked })
     }
 
 
@@ -37,28 +38,25 @@ export default class AddReview extends Component {
 
     submit() {
         // save review
-        let food_id = this.props.params.id
         let newReviewKey = firebase
             .database()
-            .ref('review')
+            .ref()
+            .child('review')
             .push()
             .key
         let newReview = {
-            food_id: food_id,
+            food_id: this.props.food_id,
             bool: this.state.bool
         }
         firebase
             .database()
             .ref('review/' + newReviewKey)
             .set(newReview)
-            .then(function(stuff) {
-                console.log("yay done saving review ", stuff)
-            })
-        // save review pic
+
         firebase
             .storage()
-            .ref('pic/' + newReviewKey)
-            .push()
+            .ref()
+            .child('pic/' + newReviewKey)
             .put(this.state.file)
             .then(function (snapshot) {
                 console.log('Uploaded' + this.state.file.name)
@@ -76,9 +74,10 @@ export default class AddReview extends Component {
 
         return (
             <div className="add-review">
+                ADD REVIEW
                 <div className="add-review-pic">
 
-                     <label className="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
+                    <label className="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
                         <i className="material-icons">file_upload</i>
                         <input type="file" className="hidden"
                             onChange={(e) => this.setImage(e)} />
@@ -95,10 +94,10 @@ export default class AddReview extends Component {
                 </div>
 
                 <div className="add-review-bool">
-                    <input type="checkbox" id="cbox2" value="second_checkbox" onChange={this.setBool}/>
+                    <input type="checkbox" id="cbox2" value="second_checkbox" onChange={this.setBool} />
                     <label htmlFor="cbox2">I would get this again</label>
                 </div>
-                 <button onClick={this.submit}> submit </button>
+                <button onClick={this.submit}> submit </button>
             </div>
         )
     }

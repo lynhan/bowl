@@ -21,7 +21,8 @@ class AddFood extends Component {
         // TODO validation
         let food = {
             name: this.state.foodName,
-            place_id: this.props.place_id
+            placeId: this.props.placeId,
+            placeName: this.props.placeName
         }
         firebase
             .database()
@@ -40,6 +41,7 @@ class AddFood extends Component {
     render() {
         return (
             <div className="add-food">
+                ADD FOOD
                 <div className="add-food-name">
                     <input type="text"
                         className=""

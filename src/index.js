@@ -6,7 +6,7 @@ import { Router } from 'react-router';
 const Routes = {
     path: '/',
     component: require('./components/App'),
-    indexRoute: { onEnter: (nextState, replace) => replace('/food') },
+    indexRoute: { onEnter: (nextState, replace) => replace('/browsefood') },
     childRoutes: [
         require('./routes/BrowseFood'),
         require('./routes/FindPlace'),
