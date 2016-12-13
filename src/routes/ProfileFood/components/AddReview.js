@@ -58,47 +58,65 @@ export default class AddReview extends Component {
             .ref()
             .child('pic/' + newReviewKey)
             .put(this.state.file)
-            .then(function (snapshot) {
+            .then(function(snapshot) {
                 console.log('Uploaded' + this.state.file.name)
             })
     }
 
 
     render() {
-        let status
-        if (this.state.file) {
-            status = (<span> {this.state.file.name} </span>)
+        var user = firebase.auth().currentUser;
+
+        if (user) {
+            // User is signed in.
+            let status
+            if (this.state.file) {
+                status = (<span> {this.state.file.name} </span>)
+            } else {
+                status = (<span> pick a picture! </span>)
+            }
+
+            return (
+                <div className="add-review">
+                    ADD REVIEW
+                    <div className="add-review-pic">
+                        <label className="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
+                            <i className="material-icons">file_upload</i>
+                            <input type="file" className="hidden"
+                                onChange={(e) => this.setImage(e)} />
+                        </label>
+
+                        <span className='upload-status'> omg status: {status} </span>
+                        {/* this is hidden :D */}
+
+                        <input
+                            className="mdl-textfield__input hidden"
+                            placeholder="File"
+                            type="text"
+                            readOnly />
+                    </div>
+
+                    <div className="add-review-bool">
+                        <input type="checkbox" id="cbox2" value="second_checkbox" onChange={this.setBool} />
+                        <label htmlFor="cbox2">I would get this again</label>
+                    </div>
+                    <button onClick={this.submit}> submit </button>
+                </div>
+            )  // end return 
         } else {
-            status = (<span> pick a picture! </span>)
+            // No user is signed in.
+            return (
+                <div className="login-btn">
+                    <button
+                        type="button"
+                        className="btn btn-success"
+                        onClick={this.props.handleLogin}>
+                        sign in with google to add review
+                </button>
+                </div>
+            )
         }
 
-        return (
-            <div className="add-review">
-                ADD REVIEW
-                <div className="add-review-pic">
 
-                    <label className="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
-                        <i className="material-icons">file_upload</i>
-                        <input type="file" className="hidden"
-                            onChange={(e) => this.setImage(e)} />
-                    </label>
-
-                    <span className='upload-status'> omg status: {status} </span>
-                    {/* this is hidden :D */}
-
-                    <input
-                        className="mdl-textfield__input hidden"
-                        placeholder="File"
-                        type="text"
-                        readOnly />
-                </div>
-
-                <div className="add-review-bool">
-                    <input type="checkbox" id="cbox2" value="second_checkbox" onChange={this.setBool} />
-                    <label htmlFor="cbox2">I would get this again</label>
-                </div>
-                <button onClick={this.submit}> submit </button>
-            </div>
-        )
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase/firebase-browser'
 
-export default class ReviewList extends Component {
+class ReviewList extends Component {
 
     constructor(props) {
         super(props)
@@ -61,3 +61,5 @@ export default class ReviewList extends Component {
         )
     }
 }
+
+module.exports = ReviewList

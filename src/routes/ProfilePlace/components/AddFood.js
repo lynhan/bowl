@@ -29,29 +29,47 @@ class AddFood extends Component {
             .ref('food/')
             .push()
             .set(food)
-            .then(function() {
+            .then(function () {
                 console.log("added food")
             })
-            .catch(function() {
+            .catch(function () {
                 console.log("add food err :(")
             })
     }
 
 
     render() {
-        return (
-            <div className="add-food">
-                ADD FOOD
+        var user = firebase.auth().currentUser;
+
+        if (user) {
+            // User is signed in.
+            return (
+                <div className="add-food">
+                    ADD FOOD
+
                 <div className="add-food-name">
-                    <input type="text"
-                        className=""
-                        id="foodName"
-                        onChange={this.setFoodName} />
-                    <label htmlFor="foodName">food name</label>
+                        <input type="text"
+                            className=""
+                            id="foodName"
+                            onChange={this.setFoodName} />
+                        <label htmlFor="foodName">food name</label>
+                    </div>
+                    <button onClick={this.submit}> submit </button>
                 </div>
-                <button onClick={this.submit}> submit </button>
-            </div>
-        )  // end return
+            )  // end return
+        } else {
+            // No user is signed in.
+            return (
+                <div className="login-btn">
+                    <button
+                        type="button"
+                        className="btn btn-success"
+                        onClick={this.props.handleLogin}>
+                        sign in with google to add to menu
+                    </button>
+                </div>
+            )
+        } // end else
     } // end render
 }
 

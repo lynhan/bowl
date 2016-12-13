@@ -1,8 +1,8 @@
 body {
     font-family: 'Merriweather Sans', sans-serif;
-    font-size: 22px;
-    color: darkgray;
-    width: 80vw;
+    font-size: 20px;
+    color: gray;
+    width: 60vw;
     margin: 0 auto;
 }
 
@@ -14,11 +14,12 @@ body {
     margin-right: 15px;
 }
 .nav > span > .nav-link {
-    color: lightseagreen;
     text-decoration: none;
+    color: gray;
 }
 .nav > span > .nav-link:hover {
-    color: cadetblue;
+    color: black;
+    text-decoration: underline;
 }
 /*nav-link active class name*/
 .nav > span > .active {

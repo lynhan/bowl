@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
-import FoodListItem from './FoodListItem'
+import Food from './Food'
 
-export default class InfoList extends Component {
+export default class FoodList extends Component {
     render() {
-        if (this.props.data && this.props.data.length === 0) {
+        console.log("food list data", this.props.data)
+
+        if (this.props.data
+            && this.props.data.length === 0
+            || !this.props.data) {
             return (
-                <div className="info-list">
-                    Nothing so far :D
+                <div className="menu">
+                    Empty menu!
                 </div>
             )
         }
-        if (!this.props.data) {
-            return (
-                <div className="info-list">
-                    Nothing so far :D
-                </div>
-            )
-        }
+
         // render items
         let list = this.props.data.map(function (item, index) {
             return (
@@ -26,9 +24,10 @@ export default class InfoList extends Component {
             )
         })
         return (
-            <div className="info-list">
+            <div className="menu">
+                MENU
                 {list}
             </div>
         )  // end return
     }  // end render
-}  // end InfoLIst
+}  // end FoodList

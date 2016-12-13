@@ -3,8 +3,10 @@ import * as firebase from 'firebase/firebase-browser'
 import { mapApiKey } from '../../../config'
 var axios = require('axios')
 
-import FoodList from './FoodList'
+import FoodList from '../../../container/FoodList'
 import AddFood from './AddFood'
+import './style.css'
+
 
 /*
 props: id (google place id)
@@ -116,17 +118,19 @@ class ProfilePlace extends Component {
             <div className="profile-place">
 
                 { /* about place /> */}
-                <div className="profile-place-name">
-                    PLACE NAME: {this.state.place.name}
+                <div className="profile-place-about">
+                    <div className="profile-place-name">
+                        {this.state.place.name}
+                    </div>
+                    <div className="profile-place-address">
+                        {this.state.place.summary}
+                    </div>          
                 </div>
-                <div className="profile-place-name">
-                    LOCATION: {this.state.place.summary}
-                </div>          
-
+                
                 { /* data expects name, summary, picture /> */}
                 <AddFood
-                placeId={this.props.params.id}
-                placeName={this.state.place.name} />
+                    placeId={this.props.params.id}
+                    placeName={this.state.place.name} />
 
                 <FoodList data={this.state.food} />
             </div>
