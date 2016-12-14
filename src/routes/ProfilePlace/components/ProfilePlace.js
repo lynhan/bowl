@@ -5,7 +5,7 @@ var axios = require('axios')
 var $ = require('jquery')
 var mapsapi = require('google-maps-api')(mapApiKey);
 
-import FoodList from '../../../container/FoodList'
+import FoodList from './FoodList'
 import AddFood from './AddFood'
 import './style.css'
 

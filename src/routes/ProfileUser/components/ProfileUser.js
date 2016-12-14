@@ -4,16 +4,17 @@ import Auth from '../../../api/Auth.js'
 import ReviewList from './ReviewList'
 
 class ProfileUser extends Component {
-     constructor(props) {
+    constructor(props) {
         super(props)
         this.state = {
             user: firebase.auth().currentUser
         }
+        this.logout = this.logout.bind(this)
     }
 
-     componentDidMount() {
+    componentDidMount() {
         let this_ = this
-        firebase.auth().onAuthStateChanged(function (user) {
+        firebase.auth().onAuthStateChanged(function(user) {
             console.log("user is now:", user)
             if (user != null) {
                 this_.setState({
@@ -32,13 +33,21 @@ class ProfileUser extends Component {
         });
     }
 
+
+    logout() {
+        Auth.logout()
+        this.setState({ user: {} })
+    }
+
+
     render() {
-        if (this.state.user) {
+        if (firebase.auth().currentUser) {
             return (
                 <div className="profile-user">
                     <div className="profile-user-greet">
                         Hi, {this.state.user.name}!
                     </div>
+                    <button onClick={this.logout}> logout </button>
                     <ReviewList userId={this.state.user.id} />
                 </div>
             )

@@ -57,7 +57,7 @@ class BrowseFood extends Component {
                 <input type="text"
                     className="browse-food-search form-control"
                     id="searchStr"
-                    placeholder="search food"
+                    placeholder="search"
                     onChange={this.setSearchStr} />
                 <FoodList data={this.state.filtered} />
             </div>

@@ -46,6 +46,8 @@ class AddFood extends Component {
             name: this.state.foodName,
             placeId: this.props.placeId,
             placeName: this.props.placeName,
+            love: 0,
+            hate: 0,
         }
         console.log("new food", food)
         firebase

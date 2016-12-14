@@ -60,6 +60,7 @@ export default class AddReview extends Component {
 
 
     submit() {
+        let this_ = this
         // save review
         let newReviewKey = firebase
             .database()
@@ -76,6 +77,27 @@ export default class AddReview extends Component {
             .database()
             .ref('review/' + newReviewKey)
             .set(newReview)
+
+        // update love for food 
+        let ref = firebase
+            .database()
+            .ref('food/' + this.props.foodId)
+
+        ref.once('value', function (snapshot) {
+            var data = snapshot.val()
+            if (data != null) {
+                let newFood = data
+                if (this_.state.bool) {
+                    newFood['love'] += 1
+                } else {
+                    newFood['hate'] += 1
+                }
+                ref.set(newFood)
+            } else {
+                console.log("no food data in food/addreview")
+            }
+        })
+
         firebase
             .storage()
             .ref()

@@ -5,6 +5,7 @@ database models
     food
         name
         place id KEY
+        percent approve
 
     review
         user id KEY
