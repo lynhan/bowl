@@ -14,7 +14,7 @@ class ProfileUser extends Component {
 
     componentDidMount() {
         let this_ = this
-        firebase.auth().onAuthStateChanged(function(user) {
+        firebase.auth().onAuthStateChanged(function (user) {
             console.log("user is now:", user)
             if (user != null) {
                 this_.setState({
@@ -43,11 +43,13 @@ class ProfileUser extends Component {
     render() {
         if (firebase.auth().currentUser) {
             return (
-                <div className="profile-user">
+                <div className="profile-user section">
                     <div className="profile-user-greet">
                         Hi, {this.state.user.name}!
                     </div>
-                    <button onClick={this.logout}> logout </button>
+                    <button
+                        className="btn btn-default"
+                        onClick={this.logout}> logout </button>
                     <ReviewList userId={this.state.user.id} />
                 </div>
             )
@@ -56,7 +58,7 @@ class ProfileUser extends Component {
                 <div className="login-btn">
                     <button
                         type="button"
-                        className="btn btn-success"
+                        className="btn btn-default"
                         onClick={Auth.login}>
                         sign in
                     </button>

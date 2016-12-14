@@ -43,7 +43,7 @@ class ReviewList extends Component {
         let list
         if (this.state.reviews && this.state.reviews.length > 0) {
             summary = (
-                <div> {this.state.reviews.length}reviews</div>
+                <div> {this.state.reviews.length} snaps</div>
             )
             list = this.state.reviews.map(function (item, index) {
                 return (
@@ -54,12 +54,11 @@ class ReviewList extends Component {
             })
         } else {
             summary = (
-                <div>No reviews so far :)</div>
+                <div>No snaps yet :)</div>
             )
         }
         return (
-            <div className="review-list">
-                {summary}
+            <div className="review-list section">
                 {list}
             </div>
         )

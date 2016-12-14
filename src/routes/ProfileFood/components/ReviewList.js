@@ -27,22 +27,13 @@ class ReviewList extends Component {
                 var array = Object.keys(data)
                     .map(key => Object.assign({}, data[key], { 'id': key }))
                 array.reverse()
-                if (this_.props.foodId) {
-                    this_.setState({
-                        reviews: array.filter(function (item) {
-                            return item.foodId === this_.props.foodId
-                        }),
-                    })
-                } else if (this_.props.userId) {
-                    this_.setState({
-                        reviews: array.filter(function (item) {
-                            return item.userId === this_.props.userId
-                        }),
-                    })
-                }
-                console.log("state", this_.state)
+                this_.setState({
+                    reviews: array.filter(function (item) {
+                        return item.foodId === this_.props.foodId
+                    }),
+                })
             } else {
-                this_.setState({ data: [] })
+                this_.setState({ reviews: [] })
             }
         })
     }
@@ -71,7 +62,7 @@ class ReviewList extends Component {
             )
         }
         return (
-            <div className="review-list">
+            <div className="review-list section">
                 {list}
             </div>
         )

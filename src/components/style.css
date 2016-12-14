@@ -1,15 +1,16 @@
 body {
     font-family: 'Merriweather Sans', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     color: gray;
     width: 60vw;
     margin: 0 auto;
 }
 
-.nav {
-    margin-top: 15px;
-    margin-bottom: 15px;
+.section {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
+
 .nav > span {
     margin-right: 15px;
 }

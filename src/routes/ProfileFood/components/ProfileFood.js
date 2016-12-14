@@ -50,7 +50,7 @@ class ProfileFood extends Component {
         }
         return (
             <div className="profile-food">
-                <div className="profile-food-about">
+                <div className="profile-food-about section">
                     <div className="profile-food-name">
                         {this.state.name}
                     </div>

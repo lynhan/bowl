@@ -6,7 +6,9 @@ import './style.css'
 export default class AddReview extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            bool: false
+        }
         this.setImage = this.setImage.bind(this)
         this.setBool = this.setBool.bind(this)
         this.submit = this.submit.bind(this)
@@ -16,7 +18,6 @@ export default class AddReview extends Component {
     componentDidMount() {
         let this_ = this
         firebase.auth().onAuthStateChanged(function (user) {
-            console.log("AddFood user is now:", user)
             if (user != null) {
                 this_.setState({
                     user: {
@@ -96,6 +97,7 @@ export default class AddReview extends Component {
             }
         })
 
+        console.log("STORING PIC AT "+ 'pic/' + newReviewKey)
         firebase
             .storage()
             .ref()
@@ -103,6 +105,8 @@ export default class AddReview extends Component {
             .put(this.state.file)
             .then(function (snapshot) {
                 console.log('Uploaded' + this.state.file.name)
+                this_.setState({ file: undefined })
+                location.reload()
             })
     }
 
@@ -120,7 +124,7 @@ export default class AddReview extends Component {
             }
 
             return (
-                <div className="add-review">
+                <div className="add-review section">
                     Tried this? Add a review
 
                     <div className="add-review-bool">

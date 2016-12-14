@@ -13,7 +13,7 @@ export default class Nav extends Component {
 
     render() {
         return (
-            <div className="nav">
+            <div className="nav section">
                 <span>
                     <Link to="/browsefood"
                     className="nav-link"
