@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase/firebase-browser'
+import Review from './Review'
 
 class ReviewList extends Component {
 
@@ -40,6 +41,7 @@ class ReviewList extends Component {
 
     render() {
         let summary
+        let list
         if (this.state.reviews && this.state.reviews.length > 0) {
             let percent = (this.state.reviews.filter(function (item) {
                 return item.bool === true
@@ -48,6 +50,13 @@ class ReviewList extends Component {
             summary = (
                 <div> {prettyPercent}% loved it </div>
             )
+            list = this.state.reviews.map(function (item, index) {
+                return (
+                    <div key={index}>
+                        <Review data={item} />
+                    </div>
+                )
+            })
         } else {
             summary = (
                 <div>No reviews so far :)</div>
@@ -57,6 +66,7 @@ class ReviewList extends Component {
             <div className="review-list">
                 REVIEWS
                 {summary}
+                {list}
             </div>
         )
     }

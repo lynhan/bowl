@@ -76,7 +76,7 @@ export default class AddReview extends Component {
             .database()
             .ref('review/' + newReviewKey)
             .set(newReview)
-
+        console.log('storing pic at ' +  'pic/' + newReviewKey)
         firebase
             .storage()
             .ref()

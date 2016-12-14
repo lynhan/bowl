@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import * as firebase from 'firebase/firebase-browser'
 import { Link } from 'react-router'
 
-export default class Info extends Component {
+export default class Food extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -52,7 +52,7 @@ export default class Info extends Component {
         let picture 
         if (this.state.pictureUrlStr) {
             picture = (
-                <div className="info-picture">
+                <div className="Food-picture">
                     <img src={this.state.pictureUrlStr}
                     alt="loading pic..."
                     className="image"/>
