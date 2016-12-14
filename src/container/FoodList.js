@@ -22,7 +22,6 @@ export default class FoodList extends Component {
         })
         return (
             <div className="menu">
-                MENU
                 {list}
             </div>
         )  // end return

@@ -76,7 +76,6 @@ export default class AddReview extends Component {
             .database()
             .ref('review/' + newReviewKey)
             .set(newReview)
-        console.log('storing pic at ' +  'pic/' + newReviewKey)
         firebase
             .storage()
             .ref()
@@ -104,15 +103,15 @@ export default class AddReview extends Component {
                 <div className="add-review">
                     ADD REVIEW
                     <div className="add-review-pic">
-                        <label className="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
+                        <label className="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
                             <i className="material-icons">file_upload</i>
                             <input type="file" className="hidden"
                                 onChange={(e) => this.setImage(e)} />
                         </label>
 
-                        <span className='upload-status'> omg status: {status} </span>
-                        {/* this is hidden :D */}
+                        <span className='upload-status'> {status} </span>
 
+                        {/* this is hidden :D */}
                         <input
                             className="mdl-textfield__input hidden"
                             placeholder="File"

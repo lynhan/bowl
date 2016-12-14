@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase/firebase-browser'
 import Auth from '../../../api/Auth.js'
-import ReviewList from '../../../container/ReviewList'
+import ReviewList from './ReviewList'
 
 class ProfileUser extends Component {
      constructor(props) {
@@ -9,7 +9,6 @@ class ProfileUser extends Component {
         this.state = {
             user: firebase.auth().currentUser
         }
-        this.listenForData = this.listenForData.bind(this)
     }
 
      componentDidMount() {
@@ -24,7 +23,6 @@ class ProfileUser extends Component {
                         id: user.uid
                     }
                 })
-                this_.listenForData(user.uid)
             } else {
                 this_.setState({
                     user: {},
@@ -34,25 +32,6 @@ class ProfileUser extends Component {
         });
     }
 
-    listenForData(uid) {
-        let this_ = this
-        let dataRef = firebase
-            .database()
-            .ref('users/' + uid)
-        dataRef.on('value', function (snapshot) {
-            var data = snapshot.val()
-            console.log('data', data)
-            if (data != null) {
-                var array = Object.keys(data)
-                    .map(key => Object.assign({}, data[key], { 'id': key }))
-                array.reverse()
-                this_.setState({ data: array })
-            } else {
-                this_.setState({ data: [] })
-            }
-        })
-    }
-
     render() {
         if (this.state.user) {
             return (
@@ -60,7 +39,7 @@ class ProfileUser extends Component {
                     <div className="profile-user-greet">
                         Hi, {this.state.user.name}!
                     </div>
-                    <ReviewList />
+                    <ReviewList userId={this.state.user.id} />
                 </div>
             )
         } else {

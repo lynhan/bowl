@@ -50,7 +50,6 @@ export default class Review extends Component {
     render() {
         let picture
         if (this.state.pictureUrlStr) {
-            debugger
             picture = (
                 <div className="review-picture">
                     <img src={this.state.pictureUrlStr}

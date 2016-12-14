@@ -46,7 +46,6 @@ class AddFood extends Component {
             name: this.state.foodName,
             placeId: this.props.placeId,
             placeName: this.props.placeName,
-            user: this.state.user.id
         }
         console.log("new food", food)
         firebase
@@ -80,7 +79,7 @@ class AddFood extends Component {
                             className=""
                             id="foodName"
                             onChange={this.setFoodName} />
-                        <label htmlFor="foodName">food name</label>
+                        <label htmlFor="foodName"></label>
                     </div>
                     <button
                     className='btn btn-default'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase/firebase-browser'
 import AddReview from './AddReview'
-import ReviewList from '../../../container/ReviewList'
+import ReviewList from './ReviewList'
 import { Link } from 'react-router'
 var axios = require('axios')
 
