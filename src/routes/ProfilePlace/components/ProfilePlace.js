@@ -20,14 +20,13 @@ class ProfilePlace extends Component {
             place: {},
             food: [],
         }
-        this.observePlace = this.observePlace.bind(this)
         this.submitPlace = this.submitPlace.bind(this)
         this.fetchFood = this.fetchFood.bind(this)
     }
 
 
     componentDidMount() {
-        this.observePlace()
+        this.fetchFood()
     }
 
 
@@ -52,16 +51,10 @@ class ProfilePlace extends Component {
     }
 
 
-    fetchFood(data) {
+    fetchFood() {
         let this_ = this
         let placeId = this.props.params.id
-        let newPlace = {
-            name: data.name,
-            summary: data.summary
-        }
-        this_.setState({
-            place: newPlace
-        })
+        let placeName = this.props.params.name
         let ref = firebase
             .database()
             .ref('food/')
@@ -84,24 +77,6 @@ class ProfilePlace extends Component {
     }
 
 
-    observePlace() {
-        let this_ = this
-        let placeId = this.props.params.id
-        let placeName = this.props.params.Name
-        firebase
-            .database()
-            .ref('/place/' + placeId)
-            .once('value').then(function (snapshot) {
-                let data = snapshot.val()
-                if (data === null) {
-                    this_.submitPlace()
-                } else {
-                    this_.fetchFood(data)
-                }
-            });
-    }
-
-
     render() {
         return (
             <div className="profile-place">
@@ -117,7 +92,7 @@ class ProfilePlace extends Component {
                 <AddFood
                     placeId={this.props.params.id}
                     placeName={this.props.params.name} />
-
+                
                 <FoodList data={this.state.food} />
             </div>
         )

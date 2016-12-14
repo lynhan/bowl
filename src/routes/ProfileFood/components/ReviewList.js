@@ -72,8 +72,6 @@ class ReviewList extends Component {
         }
         return (
             <div className="review-list">
-                REVIEWS
-                {summary}
                 {list}
             </div>
         )

@@ -9,7 +9,7 @@ export default class FoodList extends Component {
             || !this.props.data) {
             return (
                 <div className="menu">
-                    Empty menu!
+                    Nothing here :)
                 </div>
             )
         }

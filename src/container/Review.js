@@ -20,8 +20,9 @@ export default class Review extends Component {
     getPictureDownloadUrl() {
         let this_ = this
         let storageRef = firebase.storage().ref();
-        let ref = storageRef.child('pic/' + this.props.data.id);
-        console.log('getting ref at' + 'pic/' + this.props.data.id)
+        let ref = storageRef.child(this.props.data.url);
+        console.log('getting ref at ' + this.props.data.url)
+        
         ref.getDownloadURL()
             .then(function (url) {
                 this_.setState({ pictureUrlStr: url })
@@ -68,7 +69,6 @@ export default class Review extends Component {
         return (
             <div className="info">
                 {picture}
-                {bool}
             </div>
         )
     }

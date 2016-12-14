@@ -13,12 +13,14 @@ export default class FoodList extends Component {
                 </div>
             )
         }
+        
         let data = this.props.data
         data.sort(function (a, b) {
             let aLove = a.love / (a.love + a.hate)
             let bLove = b.love / (b.love + b.hate)
             return bLove - aLove
         })
+
         console.log("SORTED", data)
         let list = data.map(function (item, index) {
             return (

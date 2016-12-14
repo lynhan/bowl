@@ -33,7 +33,8 @@ class ProfileFood extends Component {
                 this_.setState({
                     name: data.name,
                     placeUrl: "/place/" + data.placeId,
-                    placeName: data.placeName
+                    placeName: data.placeName,
+                    percent: (parseFloat(data.love) / (parseFloat(data.love) + parseFloat(data.hate) ) * 100 ).toFixed(2)
                  })
             }
         });
@@ -41,16 +42,28 @@ class ProfileFood extends Component {
 
 
     render() {
+        let love
+        if (!isNaN(this.state.percent)) {
+            love = (
+                <div>{this.state.percent} loved it </div>
+            )
+        }
         return (
             <div className="profile-food">
-                <div className="profile-food-name">
-                    {this.state.name}
+                <div className="profile-food-about">
+                    <div className="profile-food-name">
+                        {this.state.name}
+                    </div>
+                    <div className="profile-food-place-link">
+                        <Link to={this.state.placeUrl}
+                            className="nav-link"
+                            activeClassName="active">{this.state.placeName}</Link>
+                    </div>
+                    <div className="profile-food-love">
+                        {love}
+                    </div>
                 </div>
-                <div className="profile-food-place-link">
-                    <Link to={this.state.placeUrl}
-                        className="nav-link"
-                        activeClassName="active">{this.state.placeName}</Link>
-                </div>
+
                 <AddReview foodId={this.props.params.id}/>
                 <ReviewList foodId={this.props.params.id} />
             </div>
