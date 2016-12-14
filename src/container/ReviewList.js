@@ -28,7 +28,7 @@ class ReviewList extends Component {
                 array.reverse()
                 this_.setState({
                     reviews: array.filter(function (item) {
-                        return item.food_id === this_.props.food_id
+                        return item.foodId === this_.props.foodId
                     }),
                 })
                 console.log("state", this_.state)

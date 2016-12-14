@@ -7,6 +7,7 @@ export default class AddReview extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            user: {},
             file: {},
             picPreviewUrl: "",
             bool: false,
@@ -14,6 +15,28 @@ export default class AddReview extends Component {
         this.setImage = this.setImage.bind(this)
         this.setBool = this.setBool.bind(this)
         this.submit = this.submit.bind(this)
+    }
+
+
+    componentDidMount() {
+        let this_ = this
+        firebase.auth().onAuthStateChanged(function (user) {
+            console.log("AddFood user is now:", user)
+            if (user != null) {
+                this_.setState({
+                    user: {
+                        name: user.displayName,
+                        email: user.email,
+                        id: user.uid
+                    }
+                })
+            } else {
+                this_.setState({
+                    user: {},
+                    reviews: [],
+                })
+            }
+        });
     }
 
 
@@ -45,8 +68,9 @@ export default class AddReview extends Component {
             .push()
             .key
         let newReview = {
-            food_id: this.props.food_id,
-            bool: this.state.bool
+            foodId: this.props.foodId,
+            bool: this.state.bool,
+            userId: this.state.user.id,
         }
         firebase
             .database()
@@ -58,7 +82,7 @@ export default class AddReview extends Component {
             .ref()
             .child('pic/' + newReviewKey)
             .put(this.state.file)
-            .then(function(snapshot) {
+            .then(function (snapshot) {
                 console.log('Uploaded' + this.state.file.name)
             })
     }

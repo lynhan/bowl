@@ -50,15 +50,15 @@ export default class Info extends Component {
 
     render() {
         let picture 
-        // if (this.state.pictureUrlStr) {
-        //     picture = (
-        //         <div className="info-picture">
-        //             <img src={this.state.pictureUrlStr}
-        //             alt="loading pic..."
-        //             className="image"/>
-        //         </div>
-        //     )
-        // }
+        if (this.state.pictureUrlStr) {
+            picture = (
+                <div className="info-picture">
+                    <img src={this.state.pictureUrlStr}
+                    alt="loading pic..."
+                    className="image"/>
+                </div>
+            )
+        }
 
         let name
         if (this.props.data.name) {

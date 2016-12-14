@@ -44,15 +44,15 @@ class ProfileFood extends Component {
         return (
             <div className="profile-food">
                 <div className="profile-food-name">
-                    FOOD: {this.state.name}
+                    {this.state.name}
                 </div>
                 <div className="profile-food-place-link">
-                    PLACE: <Link to={this.state.placeUrl}
+                    <Link to={this.state.placeUrl}
                         className="nav-link"
                         activeClassName="active">{this.state.placeName}</Link>
                 </div>
-                <AddReview food_id={this.props.params.id}/>
-                <ReviewList food_id={this.props.params.id} />
+                <AddReview foodId={this.props.params.id}/>
+                <ReviewList foodId={this.props.params.id} />
             </div>
         )
     }

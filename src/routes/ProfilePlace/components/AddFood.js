@@ -5,10 +5,33 @@ class AddFood extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            user: {},
             foodName: "",
         }
         this.submit = this.submit.bind(this)
         this.setFoodName = this.setFoodName.bind(this)
+    }
+
+
+    componentDidMount() {
+        let this_ = this
+        firebase.auth().onAuthStateChanged(function (user) {
+            console.log("AddFood user is now:", user)
+            if (user != null) {
+                this_.setState({
+                    user: {
+                        name: user.displayName,
+                        email: user.email,
+                        id: user.uid
+                    }
+                })
+            } else {
+                this_.setState({
+                    user: {},
+                    reviews: [],
+                })
+            }
+        });
     }
 
 
@@ -22,8 +45,10 @@ class AddFood extends Component {
         let food = {
             name: this.state.foodName,
             placeId: this.props.placeId,
-            placeName: this.props.placeName
+            placeName: this.props.placeName,
+            user: this.state.user.id
         }
+        console.log("new food", food)
         firebase
             .database()
             .ref('food/')
@@ -45,7 +70,10 @@ class AddFood extends Component {
             // User is signed in.
             return (
                 <div className="add-food">
-                    ADD FOOD
+                
+                <div className='add-food-header'>
+                    Add menu item
+                </div>
 
                 <div className="add-food-name">
                         <input type="text"
@@ -54,7 +82,9 @@ class AddFood extends Component {
                             onChange={this.setFoodName} />
                         <label htmlFor="foodName">food name</label>
                     </div>
-                    <button onClick={this.submit}> submit </button>
+                    <button
+                    className='btn btn-default'
+                    onClick={this.submit}> submit </button>
                 </div>
             )  // end return
         } else {
